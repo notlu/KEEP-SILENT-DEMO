@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KEEP SILENT DEMO</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            line-height: 1.6;
+        }
+        
+        /* Header Section */
+        .header-section {
+            background: linear-gradient(135deg, #07444a 0%, #1c5842 25%, #477040 50%, #808a46 75%, #bca552 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(7, 68, 74, 0.25), 0 4px 16px rgba(28, 88, 66, 0.18);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, 
+                rgba(7, 68, 74, 0.05) 0%, 
+                rgba(28, 88, 66, 0.05) 25%, 
+                rgba(71, 112, 64, 0.05) 50%, 
+                rgba(128, 138, 70, 0.05) 75%, 
+                transparent 100%);
+            pointer-events: none;
+        }
+        
+        .header-section::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(188, 165, 82, 0.06) 0%, transparent 70%);
+            animation: float 20s ease-in-out infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+            50% { transform: translate(-30%, -30%) rotate(180deg); }
+        }
+        
+        .main-title {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 0 0 20px 0;
+            color: white;
+            text-shadow: 2px 2px 8px rgba(7, 68, 74, 0.6), 0 0 20px rgba(255,255,255,0.3);
+            line-height: 1.2;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .subtitle {
+            font-size: 20px;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 1;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+        }
+        
+        /* Navigation */
+        .nav-bar {
+            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(167, 243, 208, 0.3) 100%);
+            padding: 15px 0;
+            margin-top: 20px;
+            position: relative;
+            z-index: 1;
+            border-radius: 30px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            border: 1px solid rgba(255,255,255,0.3);
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(252, 211, 77, 0.1) 100%);
+            text-shadow: 1px 1px 3px rgba(5, 150, 105, 0.5);
+        }
+        
+        .nav-link:hover {
+            background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(252, 211, 77, 0.2) 100%);
+            text-decoration: none;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(52, 211, 153, 0.3), 0 4px 10px rgba(252, 211, 77, 0.2);
+            border-color: rgba(255,255,255,0.5);
+        }
+        
+        /* Section Styling */
+        .section {
+            max-width: 1200px;
+            margin: 40px auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 3px solid #4CAF50;
+            padding-bottom: 15px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .table-container {
+            overflow-x: auto;
+            overflow-y: visible;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            scrollbar-width: thin;
+            scrollbar-color: #2E7D32 #f1f1f1;
+        }
+        .table-container::-webkit-scrollbar {
+            height: 12px;
+        }
+        .table-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 6px;
+        }
+        .table-container::-webkit-scrollbar-thumb {
+            background: #2E7D32;
+            border-radius: 6px;
+        }
+        .table-container::-webkit-scrollbar-thumb:hover {
+            background: #1B5E20;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        table {
+            width: 100%;
+            min-width: 1400px;
+            border-collapse: collapse;
+            margin: 0;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+            vertical-align: top;
+            white-space: nowrap;
+        }
+        
+        /* Allow label column to wrap - applies only to VGGSound Test */
+        .vggsound-test th:nth-child(2), .vggsound-test td:nth-child(2) {
+            white-space: normal;
+            word-wrap: break-word;
+            line-height: 1.4;
+            text-align: left;
+            max-width: 200px;
+        }
+        th:first-child, td:first-child {
+            width: 250px;
+            text-align: left;
+            position: sticky;
+            left: 0;
+            background-color: white;
+            z-index: 2;
+            border-right: 2px solid #ddd;
+        }
+        th:first-child {
+            background-color: #4CAF50;
+            color: white;
+        }
+        th:not(:first-child), td:not(:first-child) {
+            width: 280px;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .file-name {
+            font-weight: bold;
+            color: #333;
+            background-color: #E8F5E9;
+        }
+        .video-container {
+            text-align: center;
+            padding: 10px;
+        }
+        video {
+            width: 250px;
+            height: 180px;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .result-image {
+            width: 250px;
+            height: auto;
+            max-height: 200px;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transform: translateY(-20px);
+            object-fit: cover;
+        }
+        .play-btn {
+            color: #2E7D32;
+            text-decoration: none;
+            padding: 3px 8px;
+            border-radius: 4px;
+            background-color: #E8F5E9;
+            display: inline-block;
+            margin: 2px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .play-btn:hover {
+            background-color: #C8E6C9;
+        }
+        .folder-header {
+            background-color: #2E7D32;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+        }
+        /* Smooth scrolling for navigation */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Additional styles for better presentation */
+        .highlight {
+            background: linear-gradient(120deg, #A5D6A7 0%, #81C784 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        
+        /* Green theme consistency */
+        .green-accent {
+            color: #2E7D32;
+        }
+        
+        .green-bg-light {
+            background-color: #E8F5E9;
+        }
+        
+        @media (max-width: 768px) {
+            .header-section {
+                padding: 40px 15px;
+            }
+            
+            .main-title {
+                font-size: 32px;
+            }
+            
+            .subtitle {
+                font-size: 16px;
+            }
+            
+            .nav-links {
+                gap: 15px;
+            }
+            
+            .section {
+                margin: 20px 15px;
+                padding: 25px 20px;
+            }
+            
+            .section-title {
+                font-size: 24px;
+            }
+            
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            table {
+                font-size: 14px;
+                min-width: 1200px;
+            }
+            th, td {
+                padding: 8px;
+            }
+            th:first-child, td:first-child {
+                width: 200px;
+            }
+            th:not(:first-child), td:not(:first-child) {
+                width: 250px;
+            }
+            /* Mobile label column auto wrap - applies only to VGGSound Test */
+            .vggsound-test th:nth-child(2), .vggsound-test td:nth-child(2) {
+                max-width: 180px;
+                font-size: 13px;
+            }
+            video {
+                width: 220px;
+                height: 150px;
+            }
+            .result-image {
+                width: 220px;
+                max-height: 150px;
+                transform: translateY(-25px);
+            }
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <div class="header-section">
+        <h1 class="main-title">KEEP SILENT: SUPPRESSING HALLUCINATORY SPEECH IN END-TO-END VIDEO-TO-AUDIO GENERATION</h1>
+
+
+        <div class="nav-links">
+            <a href="#abstract" class="nav-link">Abstract</a>
+            <a href="#results" class="nav-link">Results</a>
+            <a href="#demo" class="nav-link">Demo</a>
+
+        </div>
+    </div>
+
+    <!-- Abstract Section -->
+    <div id="abstract" class="section">
+        <h2 class="section-title">Abstract</h2>
+        <div style="font-size: 18px; color: #555; text-align: justify; line-height: 1.8;">
+            <p>While end-to-end video-to-audio (V2A) generation has demonstrated promising results, the persistent occurrence of hallucinatory speech remains a key challenge for current V2A models. Hallucinatory speech refers to audio that exhibits the acoustic properties of human speech while containing incorrect or nonsensical linguistic content. The V2A task aims to generate  reliable audio aligned with video at the sound event level. However, extensive speech content in the training data leads V2A models to produce linguistically unclear speech and generate it in inappropriate scenarios. To address this challenge, we explore three distinct data processing methods based on audio signal processing to suppress speech in the training data. Then, exploiting forgetting phenomenon during fine-tuning, we effectively mitigate hallucinatory speech generation by fine-tuning V2A model on processed data. Besides, we propose a reliable metric to assess the frequency of hallucinatory speech. Experimental results show that our approach effectively suppresses hallucinatory speech while preserving the quality of generated sound effects and music. </p>
+            
+        </div>
+    </div>
+
+    <!-- Results Section -->
+    <div id="results" class="section">
+        <h2 class="section-title">Main Results</h2>
+        <div style="font-size: 16px; color: #555;">
+            <p style="font-size: 18px; margin-bottom: 0;">We investigate the forgetting phenomenon during fine-tuning V2A models. By leveraging this phenomenon through fine-tuning on our data, we effectively reduced hallucinatory speech while maintaining the quality of generated sound effects and music.</p>
+            
+            <!-- Hallucinatory Speech Frequency Table -->
+            <div style="margin-top: 40px;">
+                <h3 style="color: #333; text-align: center; margin-bottom: 25px; font-size: 24px;">Hallucinatory Speech Appearance Frequency</h3>
+                <div style="overflow-x: auto; background: white; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); padding: 20px;">
+                    <table style="width: 100%; border-collapse: collapse; margin: 0; min-width: 600px;">
+                        <thead>
+                            <tr style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
+                                <th style="padding: 15px 20px; text-align: left; font-weight: bold; color: #495057; border-bottom: 2px solid #dee2e6;">Method</th>
+                                <th style="padding: 15px 20px; text-align: center; font-weight: bold; color: #495057; border-bottom: 2px solid #dee2e6;">MMAudio</th>
+                                <th style="padding: 15px 20px; text-align: center; font-weight: bold; color: #495057; border-bottom: 2px solid #dee2e6;">Sep-GM</th>
+                                <th style="padding: 15px 20px; text-align: center; font-weight: bold; color: #495057; border-bottom: 2px solid #dee2e6;">ASR-SM</th>
+                                <th style="padding: 15px 20px; text-align: center; font-weight: bold; color: #495057; border-bottom: 2px solid #dee2e6;">VAD-AM</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid #dee2e6; background-color: white;">
+                                <td style="padding: 15px 20px; text-align: left; color: #495057; font-weight: 500;">HS Frequency</td>
+                                <td style="padding: 15px 20px; text-align: center; color: #495057;">0.143</td>
+                                <td style="padding: 15px 20px; text-align: center; color: #495057; font-weight: bold; background-color: #E8F5E9;">0.011</td>
+                                <td style="padding: 15px 20px; text-align: center; color: #495057;">0.052</td>
+                                <td style="padding: 15px 20px; text-align: center; color: #495057;">0.057</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p style="text-align: center; margin-top: 15px; font-size: 14px; color: #666; font-style: italic;">
+                    The table shows hallucinatory speech appearance frequency for different methods, with <strong>Sep-GM</strong> achieving the best performance (highlighted in bold).
+                </p>
+            </div>
+            
+            <!-- V2A Evaluation Table -->
+            <div style="margin-top: 50px;">
+                <h3 style="color: #333; text-align: center; margin-bottom: 25px; font-size: 24px;">V2A Evaluation under Different Training/Processing Settings</h3>
+                <div style="overflow-x: auto; background: white; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); padding: 20px;">
+                    <table style="width: 100%; border-collapse: collapse; margin: 0; min-width: 1200px; font-size: 13px;">
+                        <thead>
+                            <tr style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
+                                <th style="padding: 12px 8px; text-align: center; font-weight: bold; color: #495057; border-right: 1px solid #dee2e6;">Dataset</th>
+                                <th style="padding: 12px 8px; text-align: center; font-weight: bold; color: #495057; border-right: 1px solid #dee2e6;">Method</th>
+                                <th style="padding: 12px 6px; text-align: center; font-weight: bold; color: #495057; border-right: 1px solid #dee2e6;">FD-VGG↓</th>
+                                <th style="padding: 12px 6px; text-align: center; font-weight: bold; color: #495057; border-right: 1px solid #dee2e6;">FD-PANN↓</th>
+                                <th style="padding: 12px 6px; text-align: center; font-weight: bold; color: #495057; border-right: 1px solid #dee2e6;">FD-PASST↓</th>
+                                <th style="padding: 12px 6px; text-align: center; font-weight: bold; color: #495057; border-right: 1px solid #dee2e6;">KL-PANNS↓</th>
+                                <th style="padding: 12px 6px; text-align: center; font-weight: bold; color: #495057; border-right: 1px solid #dee2e6;">KL-PASST↓</th>
+                                <th style="padding: 12px 6px; text-align: center; font-weight: bold; color: #495057; border-right: 1px solid #dee2e6;">ISC-PANNS↑</th>
+                                <th style="padding: 12px 6px; text-align: center; font-weight: bold; color: #495057; border-right: 1px solid #dee2e6;">ISC-PASST↑</th>
+                                <th style="padding: 12px 6px; text-align: center; font-weight: bold; color: #495057; border-right: 1px solid #dee2e6;">IB-Score↑</th>
+                                <th style="padding: 12px 6px; text-align: center; font-weight: bold; color: #495057;">DeSync↓</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- VGGSound Dataset -->
+                            <tr style="border-bottom: 1px solid #dee2e6;">
+                                <td rowspan="4" style="padding: 15px 10px; text-align: center; font-weight: bold; color: #495057; background-color: #f8f9fa; border-right: 2px solid #dee2e6; vertical-align: middle;">VGGSound</td>
+                                <td style="padding: 12px 8px; text-align: left; font-weight: 600; color: #495057; border-right: 1px solid #dee2e6;">MMAudio</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">2.136</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6; font-weight: bold; background-color: #E8F5E9;">6.435</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6; font-weight: bold; background-color: #E8F5E9;">69.127</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6; font-weight: bold; background-color: #E8F5E9;">1.644</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6; font-weight: bold; background-color: #E8F5E9;">1.357</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6; font-weight: bold; background-color: #E8F5E9;">20.722</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">14.555</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6; font-weight: bold; background-color: #E8F5E9;">0.338</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; font-weight: bold; background-color: #E8F5E9;">0.444</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #dee2e6;">
+                                <td style="padding: 12px 8px; text-align: left; font-weight: 600; color: #495057; border-right: 1px solid #dee2e6;">ASR-SM</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6; font-weight: bold; background-color: #E8F5E9;">1.782</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">7.397</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">86.648</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">1.699</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">1.691</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">19.537</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6; font-weight: bold; background-color: #E8F5E9;">20.159</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">0.321</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057;">0.613</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #dee2e6;">
+                                <td style="padding: 12px 8px; text-align: left; font-weight: 600; color: #495057; border-right: 1px solid #dee2e6;">VAD-AM</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">1.789</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">6.727</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">94.224</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">1.671</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">1.533</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">19.256</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">15.620</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">0.322</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057;">0.594</td>
+                            </tr>
+                            <tr style="border-bottom: 2px solid #dee2e6;">
+                                <td style="padding: 12px 8px; text-align: left; font-weight: 600; color: #495057; border-right: 1px solid #dee2e6;">Sep-GM</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">2.076</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">9.924</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">100.580</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">1.835</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">1.615</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">16.772</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">12.339</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">0.299</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057;">0.514</td>
+                            </tr>
+                            <!-- VGG-Subset Dataset -->
+                            <tr style="border-bottom: 1px solid #dee2e6;">
+                                <td rowspan="4" style="padding: 15px 10px; text-align: center; font-weight: bold; color: #495057; background-color: #f8f9fa; border-right: 2px solid #dee2e6; vertical-align: middle;">VGG-Subset</td>
+                                <td style="padding: 12px 8px; text-align: left; font-weight: 600; color: #495057; border-right: 1px solid #dee2e6;">MMAudio</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">3.803</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">15.448</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6; font-weight: bold; background-color: #E8F5E9;">74.496</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6; font-weight: bold; background-color: #E8F5E9;">1.602</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6; font-weight: bold; background-color: #E8F5E9;">1.304</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6; font-weight: bold; background-color: #E8F5E9;">17.972</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">12.761</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6; font-weight: bold; background-color: #E8F5E9;">0.339</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; font-weight: bold; background-color: #E8F5E9;">0.449</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #dee2e6;">
+                                <td style="padding: 12px 8px; text-align: left; font-weight: 600; color: #495057; border-right: 1px solid #dee2e6;">ASR-SM</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6; font-weight: bold; background-color: #E8F5E9;">3.073</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">15.671</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">93.356</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">1.653</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">1.615</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">17.398</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6; font-weight: bold; background-color: #E8F5E9;">17.283</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">0.324</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057;">0.608</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #dee2e6;">
+                                <td style="padding: 12px 8px; text-align: left; font-weight: 600; color: #495057; border-right: 1px solid #dee2e6;">VAD-AM</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">3.156</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6; font-weight: bold; background-color: #E8F5E9;">14.923</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">101.344</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">1.631</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">1.478</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">17.198</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">13.583</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">0.325</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057;">0.598</td>
+                            </tr>
+                            <tr style="border-bottom: 2px solid #dee2e6;">
+                                <td style="padding: 12px 8px; text-align: left; font-weight: 600; color: #495057; border-right: 1px solid #dee2e6;">Sep-GM</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">4.136</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">18.899</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">95.711</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">1.735</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">1.485</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">16.851</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">12.531</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">0.317</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057;">0.492</td>
+                            </tr>
+                            <!-- VGG-Sep Dataset -->
+                            <tr style="border-bottom: 1px solid #dee2e6;">
+                                <td rowspan="4" style="padding: 15px 10px; text-align: center; font-weight: bold; color: #495057; background-color: #f8f9fa; border-right: 2px solid #dee2e6; vertical-align: middle;">VGG-Sep</td>
+                                <td style="padding: 12px 8px; text-align: left; font-weight: 600; color: #495057; border-right: 1px solid #dee2e6;">MMAudio</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">6.109</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">15.549</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">98.086</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">1.988</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">1.646</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6; font-weight: bold; background-color: #E8F5E9;">17.972</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6; font-weight: bold; background-color: #E8F5E9;">12.745</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6; font-weight: bold; background-color: #E8F5E9;">0.339</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; font-weight: bold; background-color: #E8F5E9;">0.448</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #dee2e6;">
+                                <td style="padding: 12px 8px; text-align: left; font-weight: 600; color: #495057; border-right: 1px solid #dee2e6;">ASR-SM</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6; font-weight: bold; background-color: #E8F5E9;">3.797</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">12.158</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">107.792</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">1.860</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">1.829</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">17.398</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">17.252</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">0.324</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057;">0.608</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #dee2e6;">
+                                <td style="padding: 12px 8px; text-align: left; font-weight: 600; color: #495057; border-right: 1px solid #dee2e6;">VAD-AM</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">3.919</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6; font-weight: bold; background-color: #E8F5E9;">11.383</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">108.538</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">1.843</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">1.632</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">17.198</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">13.572</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">0.325</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057;">0.598</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #dee2e6;">
+                                <td style="padding: 12px 8px; text-align: left; font-weight: 600; color: #495057; border-right: 1px solid #dee2e6;">Sep-GM</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">5.119</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">11.924</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6; font-weight: bold; background-color: #E8F5E9;">77.493</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6; font-weight: bold; background-color: #E8F5E9;">1.786</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6; font-weight: bold; background-color: #E8F5E9;">1.487</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">16.851</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">12.538</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057; border-right: 1px solid #dee2e6;">0.317</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #495057;">0.492</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="margin-top: 15px; font-size: 13px; color: #666;">
+                    <p style="text-align: center; margin-bottom: 10px;"><strong>Evaluation Metrics:</strong></p>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 10px; text-align: center;">
+                        <div>↓ indicates lower is better</div>
+                        <div>↑ indicates higher is better</div>
+                        <div style="background-color: #E8F5E9; padding: 5px; border-radius: 3px;">Green background indicates best results</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Demo Section Header -->
+    <div id="demo" class="section">
+        <h2 class="section-title">System Demo</h2>
+        <div style="text-align: center; margin-bottom: 30px; color: #666; font-size: 16px;">
+            <p>The following is our demo. Each video presents audio generated by different approaches; you can click Play to experience the performance differences.</p>
+
+        </div>
+    </div>
+
+    <div class="container vggsound-test">
+        <h1>VGGSound Test</h1>
+
+        <div class="table-container">
+            <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>label</th>
+                    <th>MMAudio</th>
+                    <th>VGG-CT</th>
+                    <th>Sep-GM</th>
+                    <th>VAD-AM</th>
+                    <th>ASR_SM</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td class="file-name">fbOcgbgERGg</td>
+                    <td class="file-name">cutting hair with electric trimmers</td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="VGGSound Test/video/vgg/fbOcgbgERGg_000192.mp4" type="video/mp4">
+                        </video>
+                        <img src="VGGSound Test/pic/vgg/fbOcgbgERGg_000192.png" alt="VGG-CT Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="VGGSound Test/video/vggo/fbOcgbgERGg_000192.mp4" type="video/mp4">
+                        </video>
+                        <img src="VGGSound Test/pic/vggo/fbOcgbgERGg_000192.png" alt="MMAudio Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="VGGSound Test/video/fenli/fbOcgbgERGg_000192.mp4" type="video/mp4">
+                        </video>
+                        <img src="VGGSound Test/pic/fenli/fbOcgbgERGg_000192.png" alt="Sep-GM Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="VGGSound Test/video/vad/fbOcgbgERGg_000192.mp4" type="video/mp4">
+                        </video>
+                        <img src="VGGSound Test/pic/vad/fbOcgbgERGg_000192.png" alt="VAD-AM Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="VGGSound Test/video/whisperx/fbOcgbgERGg_000192.mp4" type="video/mp4">
+                        </video>
+                        <img src="VGGSound Test/pic/whisperx/fbOcgbgERGg_000192.png" alt="ASR_SM Result" class="result-image">
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="file-name">mtj8ovlWcGQ</td>
+                    <td class="file-name">snake rattling</td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="VGGSound Test/video/vgg/mtj8ovlWcGQ_000104.mp4" type="video/mp4">
+                        </video>
+                        <img src="VGGSound Test/pic/vgg/mtj8ovlWcGQ_000104.png" alt="VGG-CT Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="VGGSound Test/video/vggo/mtj8ovlWcGQ_000104.mp4" type="video/mp4">
+                        </video>
+                        <img src="VGGSound Test/pic/vggo/mtj8ovlWcGQ_000104.png" alt="MMAudio Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="VGGSound Test/video/fenli/mtj8ovlWcGQ_000104.mp4" type="video/mp4">
+                        </video>
+                        <img src="VGGSound Test/pic/fenli/mtj8ovlWcGQ_000104.png" alt="Sep-GM Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="VGGSound Test/video/vad/mtj8ovlWcGQ_000104.mp4" type="video/mp4">
+                        </video>
+                        <img src="VGGSound Test/pic/vad/mtj8ovlWcGQ_000104.png" alt="VAD-AM Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="VGGSound Test/video/whisperx/mtj8ovlWcGQ_000104.mp4" type="video/mp4">
+                        </video>
+                        <img src="VGGSound Test/pic/whisperx/mtj8ovlWcGQ_000104.png" alt="ASR_SM Result" class="result-image">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="file-name">ovFG_3EjFac</td>
+                    <td class="file-name">people shuffling</td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="VGGSound Test/video/vgg/ovFG_3EjFac_000005.mp4" type="video/mp4">
+                        </video>
+                        <img src="VGGSound Test/pic/vgg/ovFG_3EjFac_000005.png" alt="VGG-CT Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="VGGSound Test/video/vggo/ovFG_3EjFac_000005.mp4" type="video/mp4">
+                        </video>
+                        <img src="VGGSound Test/pic/vggo/ovFG_3EjFac_000005.png" alt="MMAudio Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="VGGSound Test/video/fenli/ovFG_3EjFac_000005.mp4" type="video/mp4">
+                        </video>
+                        <img src="VGGSound Test/pic/fenli/ovFG_3EjFac_000005.png" alt="Sep-GM Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="VGGSound Test/video/vad/ovFG_3EjFac_000005.mp4" type="video/mp4">
+                        </video>
+                        <img src="VGGSound Test/pic/vad/ovFG_3EjFac_000005.png" alt="VAD-AM Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="VGGSound Test/video/whisperx/ovFG_3EjFac_000005.mp4" type="video/mp4">
+                        </video>
+                        <img src="VGGSound Test/pic/whisperx/ovFG_3EjFac_000005.png" alt="ASR_SM Result" class="result-image">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="file-name">sAGJCkak8V0</td>
+                    <td class="file-name">eating with cutlery</td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="VGGSound Test/video/vgg/sAGJCkak8V0_000060.mp4" type="video/mp4">
+                        </video>
+                        <img src="VGGSound Test/pic/vgg/sAGJCkak8V0_000060.png" alt="VGG-CT Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="VGGSound Test/video/vggo/sAGJCkak8V0_000060.mp4" type="video/mp4">
+                        </video>
+                        <img src="VGGSound Test/pic/vggo/sAGJCkak8V0_000060.png" alt="MMAudio Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="VGGSound Test/video/fenli/sAGJCkak8V0_000060.mp4" type="video/mp4">
+                        </video>
+                        <img src="VGGSound Test/pic/fenli/sAGJCkak8V0_000060.png" alt="Sep-GM Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="VGGSound Test/video/vad/sAGJCkak8V0_000060.mp4" type="video/mp4">
+                        </video>
+                        <img src="VGGSound Test/pic/vad/sAGJCkak8V0_000060.png" alt="VAD-AM Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="VGGSound Test/video/whisperx/sAGJCkak8V0_000060.mp4" type="video/mp4">
+                        </video>
+                        <img src="VGGSound Test/pic/whisperx/sAGJCkak8V0_000060.png" alt="ASR_SM Result" class="result-image">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="file-name">zZsetnYA5RM</td>
+                    <td class="file-name">cuckoo bird calling</td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="VGGSound Test/video/vgg/zZsetnYA5RM_000001.mp4" type="video/mp4">
+                        </video>
+                        <img src="VGGSound Test/pic/vgg/zZsetnYA5RM_000001.png" alt="VGG-CT Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="VGGSound Test/video/vggo/zZsetnYA5RM_000001.mp4" type="video/mp4">
+                        </video>
+                        <img src="VGGSound Test/pic/vggo/zZsetnYA5RM_000001.png" alt="MMAudio Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="VGGSound Test/video/fenli/zZsetnYA5RM_000001.mp4" type="video/mp4">
+                        </video>
+                        <img src="VGGSound Test/pic/fenli/zZsetnYA5RM_000001.png" alt="Sep-GM Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="VGGSound Test/video/vad/zZsetnYA5RM_000001.mp4" type="video/mp4">
+                        </video>
+                        <img src="VGGSound Test/pic/vad/zZsetnYA5RM_000001.png" alt="VAD-AM Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="VGGSound Test/video/whisperx/zZsetnYA5RM_000001.mp4" type="video/mp4">
+                        </video>
+                        <img src="VGGSound Test/pic/whisperx/zZsetnYA5RM_000001.png" alt="ASR_SM Result" class="result-image">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="file-name">eQP-kboBF-0</td>
+                    <td class="file-name">chopping food</td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="VGGSound Test/video/vgg/eQP-kboBF-0_000040.mp4" type="video/mp4">
+                        </video>
+                        <img src="VGGSound Test/pic/vgg/eQP-kboBF-0_000040.png" alt="VGG-CT Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="VGGSound Test/video/vggo/eQP-kboBF-0_000040.mp4" type="video/mp4">
+                        </video>
+                        <img src="VGGSound Test/pic/vggo/eQP-kboBF-0_000040.png" alt="MMAudio Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="VGGSound Test/video/fenli/eQP-kboBF-0_000040.mp4" type="video/mp4">
+                        </video>
+                        <img src="VGGSound Test/pic/fenli/eQP-kboBF-0_000040.png" alt="Sep-GM Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="VGGSound Test/video/vad/eQP-kboBF-0_000040.mp4" type="video/mp4">
+                        </video>
+                        <img src="VGGSound Test/pic/vad/eQP-kboBF-0_000040.png" alt="VAD-AM Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="VGGSound Test/video/whisperx/eQP-kboBF-0_000040.mp4" type="video/mp4">
+                        </video>
+                        <img src="VGGSound Test/pic/whisperx/eQP-kboBF-0_000040.png" alt="ASR_SM Result" class="result-image">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+    <div class="container kling-eval">
+        <h1>Kling Eval</h1>
+
+        <div class="table-container">
+            <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>MMAudio</th>
+                    <th>VGG-CT</th>
+                    <th>Sep-GM</th>
+                    <th>VAD-AM</th>
+                    <th>ASR_SM</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td class="file-name">22183</td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/mmaudio/22183.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/mmaudio/22183.png" alt="MMAudio Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/vgg/22183.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/vgg/22183.png" alt="VGG-CT Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/sep/22183.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/sep/22183.png" alt="Sep-GM Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/vad/22183.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/vad/22183.png" alt="VAD-AM Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/asr/22183.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/asr/22183.png" alt="ASR_SM Result" class="result-image">
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="file-name">22555</td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/mmaudio/22555.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/mmaudio/22555.png" alt="MMAudio Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/vgg/22555.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/vgg/22555.png" alt="VGG-CT Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/sep/22555.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/sep/22555.png" alt="Sep-GM Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/vad/22555.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/vad/22555.png" alt="VAD-AM Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/asr/22555.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/asr/22555.png" alt="ASR_SM Result" class="result-image">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="file-name">33307</td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/mmaudio/33307.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/mmaudio/33307.png" alt="MMAudio Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/vgg/33307.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/vgg/33307.png" alt="VGG-CT Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/sep/33307.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/sep/33307.png" alt="Sep-GM Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/vad/33307.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/vad/33307.png" alt="VAD-AM Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/asr/33307.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/asr/33307.png" alt="ASR_SM Result" class="result-image">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="file-name">38783</td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/mmaudio/38783.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/mmaudio/38783.png" alt="MMAudio Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/vgg/38783.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/vgg/38783.png" alt="VGG-CT Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/sep/38783.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/sep/38783.png" alt="Sep-GM Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/vad/38783.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/vad/38783.png" alt="VAD-AM Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/asr/38783.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/asr/38783.png" alt="ASR_SM Result" class="result-image">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="file-name">4250</td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/mmaudio/4250.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/mmaudio/4250.png" alt="MMAudio Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/vgg/4250.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/vgg/4250.png" alt="VGG-CT Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/sep/4250.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/sep/4250.png" alt="Sep-GM Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/vad/4250.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/vad/4250.png" alt="VAD-AM Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/asr/4250.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/asr/4250.png" alt="ASR_SM Result" class="result-image">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="file-name">42818</td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/mmaudio/42818.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/mmaudio/42818.png" alt="MMAudio Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/vgg/42818.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/vgg/42818.png" alt="VGG-CT Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/sep/42818.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/sep/42818.png" alt="Sep-GM Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/vad/42818.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/vad/42818.png" alt="VAD-AM Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/asr/42818.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/asr/42818.png" alt="ASR_SM Result" class="result-image">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="file-name">43374</td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/mmaudio/43374.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/mmaudio/43374.png" alt="MMAudio Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/vgg/43374.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/vgg/43374.png" alt="VGG-CT Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/sep/43374.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/sep/43374.png" alt="Sep-GM Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/vad/43374.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/vad/43374.png" alt="VAD-AM Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/asr/43374.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/asr/43374.png" alt="ASR_SM Result" class="result-image">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="file-name">6410</td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/mmaudio/6410.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/mmaudio/6410.png" alt="MMAudio Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/vgg/6410.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/vgg/6410.png" alt="VGG-CT Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/sep/6410.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/sep/6410.png" alt="Sep-GM Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/vad/6410.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/vad/6410.png" alt="VAD-AM Result" class="result-image">
+                    </td>
+                    <td class="video-container">
+                        <video controls preload="metadata">
+                            <source src="kling/video/asr/6410.mp4" type="video/mp4">
+                        </video>
+                        <img src="kling/pic/asr/6410.png" alt="ASR_SM Result" class="result-image">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+</body>
+</html>
